@@ -36,11 +36,11 @@ docker volume create -d s3fs-my-bucket s3fs-my-bucket-volume
 Then either use the volume in docker run or in a compose yml
 
 We noticed that using the volume in a docker compose file while using
-docker-compose gave error after restarting the stack (docker-compose up
-when the stacks is running) and also didn't remove the volume on brining the stack
+docker-compose gave an error after (re)starting the stack (docker-compose up
+when the stacks is running) and also didn't remove the volume on bringing the stack
 down
 
-When using the news docker compose plugin, this behavior was fixed
+When using the new docker compose plugin, this behavior was fixed
 
 ```yml
 version: "3"
@@ -58,7 +58,7 @@ Using `docker compose up -d` created the volume, `docker compose down` removed i
 
 Exactly as we expect it to.
 
-And no, back to the original README
+And now, back to the original README
 
 # Docker Managed Volume Plugins
 
