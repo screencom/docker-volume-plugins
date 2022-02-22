@@ -18,7 +18,7 @@ In our use case we usually only want to access a single bucket
 
 ```shell
 docker plugin install --alias s3fs-my-bucket \
-  mochoa/s3fs-volume-plugin \
+  screencom/s3fs-volume-plugin \
   --grant-all-permissions --disable
 
 docker plugin set s3fs-my-bucket AWSACCESSKEYID=YOURKEYHERE
