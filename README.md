@@ -33,9 +33,9 @@ docker plugin enable s3fs-my-bucket
 docker volume create -d s3fs-my-bucket s3fs-my-bucket-volume
 ```
 
-Then either use the volume in docker run of in a compose yml
+Then either use the volume in docker run or in a compose yml
 
-We noticed that using the volume in a dokcer compose file while using
+We noticed that using the volume in a docker compose file while using
 docker-compose gave error after restarting the stack (docker-compose up
 when the stacks is running) and also didn't remove the volume on brining the stack
 down
