@@ -1,52 +1,38 @@
 {
-    "description": "S3FS plugin for Docker v2.0.8",
-    "documentation": "https://github.com/marcelo-ochoa/docker-volume-plugins/",
-    "entrypoint": [
-        "/usr/bin/tini",
-        "--",
-        "/s3fs-volume-plugin"
-    ],
-    "env": [
-        {
-            "name": "AWSACCESSKEYID",
-            "settable": [
-                "value"
-            ],
-            "value": ""
-        },
-        {
-            "name": "AWSSECRETACCESSKEY",
-            "settable": [
-                "value"
-            ],
-            "value": ""
-        },
-        {
-            "name": "DEFAULT_S3FSOPTS",
-            "settable": [
-                "value"
-            ],
-            "value": "nomultipart,use_path_request_style"
-        }
-    ],
-    "network": {
-        "type": "host"
+  "description": "S3FS plugin for Docker v2.0.10",
+  "documentation": "https://github.com/screencom/docker-volume-plugins/",
+  "entrypoint": ["/usr/bin/tini", "--", "/s3fs-volume-plugin"],
+  "env": [
+    {
+      "name": "AWSACCESSKEYID",
+      "settable": ["value"],
+      "value": ""
     },
-    "propagatedMount": "/var/lib/docker-volumes",
-    "interface": {
-        "types": [
-            "docker.volumedriver/1.0"
-        ],
-        "socket": "s3fs.sock"
+    {
+      "name": "AWSSECRETACCESSKEY",
+      "settable": ["value"],
+      "value": ""
     },
-    "linux": {
-        "capabilities": [
-            "CAP_SYS_ADMIN"
-        ],
-        "devices": [
-            {
-                "path": "/dev/fuse"
-            }
-        ]
+    {
+      "name": "DEFAULT_S3FSOPTS",
+      "settable": ["value"],
+      "value": "nomultipart,use_path_request_style"
     }
+  ],
+  "network": {
+    "type": "host"
+  },
+  "propagatedMount": "/var/lib/docker-volumes",
+  "interface": {
+    "types": ["docker.volumedriver/1.0"],
+    "socket": "s3fs.sock"
+  },
+  "linux": {
+    "capabilities": ["CAP_SYS_ADMIN"],
+    "devices": [
+      {
+        "path": "/dev/fuse"
+      }
+    ]
+  }
 }

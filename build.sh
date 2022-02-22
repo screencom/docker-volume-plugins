@@ -8,6 +8,8 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+PUBLISHER=screencom
+
 export TAG=${1:-latest}
 export ARCH=${2:-"$(uname -m)"}
 
@@ -15,7 +17,7 @@ build() {
     if [ $ARCH == "armv7l" ]
     then
         BPLATFORM="linux/arm/v7"
-    else if [ $ARCH == "aarch64" ] 
+    else if [ $ARCH == "aarch64" ]
         then
             BPLATFORM="linux/arm64"
         else
@@ -24,9 +26,9 @@ build() {
     fi
     if [ $ARCH == "x86_64" ]
     then
-        docker plugin rm -f mochoa/$1:$TAG || true
+        docker plugin rm -f ${PUBLISHER}/$1:$TAG || true
     else
-        docker plugin rm -f mochoa/$1-$ARCH:$TAG || true
+        docker plugin rm -f ${PUBLISHER}/$1-$ARCH:$TAG || true
     fi
     docker rmi -f rootfsimage || true
     docker buildx build --load --platform ${BPLATFORM} \
@@ -41,13 +43,13 @@ build() {
     cp $1/config.json build
     if [ $ARCH == "x86_64" ]
     then
-        docker plugin create mochoa/$1:$TAG build
-        docker plugin push mochoa/$1:$TAG
+        docker plugin create ${PUBLISHER}/$1:$TAG build
+        echo docker plugin push ${PUBLISHER}/$1:$TAG
     else
-        docker plugin create mochoa/$1-$ARCH:$TAG build
-        docker plugin push mochoa/$1-$ARCH:$TAG
+        docker plugin create ${PUBLISHER}/$1-$ARCH:$TAG build
+        echo docker plugin push ${PUBLISHER}/$1-$ARCH:$TAG
     fi
 }
-build glusterfs-volume-plugin
+# build glusterfs-volume-plugin
 build s3fs-volume-plugin
-build cifs-volume-plugin
+# build cifs-volume-plugin

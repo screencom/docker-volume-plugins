@@ -29,7 +29,16 @@ func (p *s3fsDriver) MountOptions(req *volume.CreateRequest) []string {
 	} else {
 		s3fsoptsArray = append(s3fsoptsArray, strings.Split(p.defaultS3fsopts, ",")...)
 	}
-	s3fsoptsArray = AppendBucketOptionsByVolumeName(s3fsoptsArray, req.Name)
+	hasBucket := false
+	for _, arg := range s3fsoptsArray {
+		if strings.HasPrefix(arg, "bucket=") {
+			hasBucket = true
+		}
+	}
+
+	if !hasBucket {
+		s3fsoptsArray = AppendBucketOptionsByVolumeName(s3fsoptsArray, req.Name)
+	}
 
 	return []string{"-o", strings.Join(s3fsoptsArray, ",")}
 }
